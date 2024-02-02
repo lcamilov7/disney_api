@@ -6,4 +6,10 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
+  resources :genres, only: :index do
+    resources :movies, only: :index do
+      resources :characters
+    end
+  end
+  root to: "characters#index"
 end
