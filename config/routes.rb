@@ -8,8 +8,10 @@ Rails.application.routes.draw do
 
   resources :genres, only: :index do
     resources :movies, only: :index do
-      resources :characters
+      resources :characters, only: %i[new create]
     end
   end
+  get "/characters", to: "characters#index"
+  get "/characters/:id", to: "characters#show"
   root to: "characters#index"
 end
