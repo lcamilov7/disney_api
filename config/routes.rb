@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :genres, only: :index do
-    resources :movies, only: :index do
+    resources :movies do
       resources :characters, only: %i[new create]
     end
   end
+  get "/movies", to: "movies#index"
   get "/characters", to: "characters#index"
   get "/characters/:id", to: "characters#show"
   root to: "characters#index"
